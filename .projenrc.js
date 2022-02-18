@@ -1,12 +1,24 @@
-const { TypeScriptAppProject } = require('projen');
-const project = new TypeScriptAppProject({
+const { typescript } = require('projen');
+
+const project = new typescript.TypeScriptProject({
   defaultReleaseBranch: 'main',
   name: 'index-markdown-repo',
+  description: 'Indexes a repository full of MarkDown files',
+  repository: 'https://github.com/rix0rrr/index-markdown-repo',
+  authorName: 'Rico Huijbers',
 
-  // deps: [],                /* Runtime dependencies of this module. */
-  // description: undefined,  /* The description is just a string that helps people understand the purpose of the package. */
-  // devDeps: [],             /* Build dependencies for this module. */
-  // packageName: undefined,  /* The "name" in package.json. */
-  // release: undefined,      /* Add release management to this project. */
+  bin: {
+    'index-markdown-repo': 'bin/index-markdown-repo',
+  },
+
+  deps: ['commonmark'],
+  devDeps: ['@types/commonmark'],
+  releaseToNpm: true,
+  tsconfig: {
+    compilerOptions: {
+      target: 'ES2019',
+      lib: ['es2019'], // allow Array.prototype.flat etc.
+    },
+  },
 });
 project.synth();
