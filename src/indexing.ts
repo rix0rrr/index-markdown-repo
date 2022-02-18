@@ -34,11 +34,11 @@ export function indexDirectory(object: MarkdownDirectory, options: IndexObjectOp
     const mutations = new Array<TextMutation>();
 
     // Render toc of files in this directory
-    const toc = renderFileToc(object.filename, object.entries);
+    const toc = renderFileToc(object.rootDocument.filename, object.entries);
     mutations.push(makeMutation(object.rootDocument.tree, 'TOC', toc, ['h2', 'bottom']));
 
     // Render nav to other directories
-    const nav = renderNav(object.filename, options);
+    const nav = renderNav(object.rootDocument.filename, options);
     mutations.push(makeMutation(object.rootDocument.tree, 'NAV', nav, ['top']));
 
     ret.push({ filename: object.rootDocument.filename, mutations });
@@ -191,5 +191,15 @@ function findStart(): Span {
 }
 
 function makeFsLink(filename: string, obj: MarkdownFsObject) {
-  return `[${obj.title}](${path.posix.relative(filename, obj.filename)})`;
+  if (filename.endsWith('.md')) {
+    // Link relative to directory
+    filename = path.dirname(filename);
+  }
+
+  let link = path.posix.relative(filename, obj.filename);
+  if (link === '.' || link === '') {
+    link = 'README.md';
+  }
+
+  return `[${obj.title}](${link})`;
 }
