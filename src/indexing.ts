@@ -64,7 +64,7 @@ function renderFileToc(filename: string, contents: MarkdownFsObject[]): string {
 
   const ret = new Array<string>();
   ret.push('--------------');
-  ret.push('IN THIS DIRECTORY');
+  ret.push('In this directory');
   ret.push('');
   for (const entry of contents) {
     ret.push(`- ${makeFsLink(filename, entry)}`);
@@ -78,7 +78,7 @@ function renderSectionToc(sections: MarkdownSection[], maxLevel: number): string
 
   const ret = new Array<string>();
   ret.push('--------------');
-  ret.push('TABLE OF CONTENTS');
+  ret.push('Table of Contents');
   ret.push('');
   sections.forEach(recurse);
   ret.push('--------------');
