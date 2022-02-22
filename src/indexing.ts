@@ -6,7 +6,7 @@ import { MarkdownDirectory, MarkdownDocument, MarkdownFsObject, MarkdownSection 
 export interface IndexObjectOptions {
   readonly prev?: MarkdownFsObject;
   readonly next?: MarkdownFsObject;
-  readonly up?: MarkdownDirectory;
+  readonly up?: MarkdownFsObject;
 }
 
 export function indexObject(object: MarkdownFsObject, options: IndexObjectOptions = {}): FileMutation[] {
@@ -25,7 +25,7 @@ export function indexDirectory(object: MarkdownDirectory, options: IndexObjectOp
     ret.push(...indexObject(object.entries[i], {
       prev: i > 0 ? object.entries[i-1] : undefined,
       next: i < object.entries.length - 1 ? object.entries[i+1] : undefined,
-      up: object,
+      up: object.rootDocument,
     }));
   }
 
