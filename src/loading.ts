@@ -107,9 +107,11 @@ function textOf(node: commonmark.Node) {
     if (!current.entering) { continue; }
     if (current.node.type === 'text') {
       ret.push(current.node.literal ?? '');
+    } else if (current.node.type === 'code') {
+      ret.push('`' + current.node.literal + '`');
     }
   }
-  return ret.join(' ');
+  return ret.join('');
 }
 
 function anchorFromTitle(title: string) {
