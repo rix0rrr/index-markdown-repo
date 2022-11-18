@@ -87,7 +87,7 @@ function renderSectionToc(sections: MarkdownSection[], maxLevel: number): string
   function recurse(section: MarkdownSection) {
     if (section.level > maxLevel) { return; }
 
-    ret.push(`${'  '.repeat(section.level - 2)}- [${section.title}](${section.anchor})`);
+    ret.push(`${'  '.repeat(Math.max(0, section.level - 2))}- [${section.title}](${section.anchor})`);
     section.sections.forEach(recurse);
   }
 }
