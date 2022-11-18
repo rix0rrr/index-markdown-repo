@@ -29,3 +29,12 @@ jobs:
         with:
           commit_message: Automatically update Markdown nav
 ```
+
+## Tip
+
+To browse the results locally:
+
+```shell
+$ pip install grip
+$ grip
+```

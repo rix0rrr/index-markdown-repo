@@ -201,5 +201,9 @@ function makeFsLink(filename: string, obj: MarkdownFsObject) {
     link = 'README.md';
   }
 
+  if (obj.type === 'directory') {
+    link += '/';
+  }
+
   return `[${obj.title}](${link})`;
 }
