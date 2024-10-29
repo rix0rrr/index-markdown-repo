@@ -116,7 +116,7 @@ function textOf(node: commonmark.Node) {
 
 function anchorFromTitle(title: string) {
   // Based on GitHub conventions
-  return '#' + title.replace(/[^a-zA-Z0-9]+/g, '-').toLowerCase().replace(/^-|-$/g, '');
+  return '#' + title.split(' ').join('-').replace(/[^a-zA-Z0-9-]+/g, '').toLowerCase();
 }
 
 async function fileExists(filename: string) {
